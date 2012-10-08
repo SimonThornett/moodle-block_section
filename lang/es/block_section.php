@@ -25,9 +25,12 @@
 
 $string['pluginname'] = 'Section';
 $string['blocksettings'] = 'Configuración';
-$string['blockcourse'] = 'Número de identificación del curso (Dejar este espacio en blanco para usar el curso actual)';
-$string['blockstring'] = 'Sección';
+$string['blockcourse'] = 'Número de identificación del curso';
+$string['blockcourse_help'] = 'Dejar este espacio en blanco para usar el curso actual. El ID de curso se puede encontrar en la dirección URL de la página del curso: myMoodle.edu/course/view.php?<strong>id=42</strong>';
+$string['blocksection'] = 'Sección';
+$string['blocksection_help'] = 'El número de la sección para mostrar. Sección numeración comienza en 0. Cuando la sección seleccionada no existe, el bloque no se muestra.';
 $string['blocktitle'] = 'Título';
+$string['blocktitle_help'] = 'El título para esta instancia del bloque.';
 $string['blockteacheredit'] = 'Los profesores pueden editar este block';
 $string['section:editsections'] = 'Capaz de cambiar la sección mostrada';
 $string['section:editcourses'] = 'Capaz de cambiar el curso de la cual se muestra la sección';
