@@ -19,34 +19,36 @@
  *
  * @package    block
  * @subpackage section
- * @copyright  2012 onwards Nathan Robbins
+ * @copyright  2012 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_section extends block_list {
     function init(){
         $this->title = get_string('pluginname', 'block_section');
     }
-		public function specialization() {
-			if (!empty($this->config->title)) {
-				$this->title = $this->config->title;
-			} else {
-				$this->title = get_string('blocktitle', 'block_section');
-			}
-			if (empty($this->config->section)) {
-				$this->config->section = 0;
-			}    
-            
-		}
-		
+    public function specialization() {
+        if (!empty($this->config->title)) {
+            $this->title = $this->config->title;
+        } else {
+            $this->title = get_string('blocktitle', 'block_section');
+        }
+        if (empty($this->config->section)) {
+            $this->section = 0;
+        } else {
+            $this->section = $this->config->section;
+        }
+        
+    }
+        
     function applicable_formats() {
         return array(
-				'course-view' => true,
-				'site-index' => true,
-				);
+                'course-view' => true,
+                'site-index' => true,
+                );
     }
-		public function instance_allow_multiple() {
-			return true;
-		}
+    public function instance_allow_multiple() {
+        return true;
+    }
     function get_content() {
         global $USER, $CFG, $DB, $OUTPUT;
 
@@ -64,7 +66,7 @@ class block_section extends block_list {
         }
 
         if(!empty($this->config->course) && ($DB->get_record('course', array('id'=>$this->config->course)) != null)){
-						$course = $DB->get_record('course', array('id'=>$this->config->course));
+            $course = $DB->get_record('course', array('id'=>$this->config->course));
         } else {
             $course = $this->page->course;
         }
@@ -75,12 +77,12 @@ class block_section extends block_list {
         $isediting = $this->page->user_is_editing() && has_capability('moodle/course:manageactivities', $context);
         $modinfo = get_fast_modinfo($course);
 
-				
+                
 /// extra fast view mode
         if (!$isediting) {
-            if (!empty($modinfo->sections[$this->config->section])) {
+            if (!empty($modinfo->sections[$this->section])) {
                 $options = array('overflowdiv'=>true);
-                foreach($modinfo->sections[$this->config->section] as $cmid) {
+                foreach($modinfo->sections[$this->section] as $cmid) {
                     $cm = $modinfo->cms[$cmid];
                     if (!$cm->uservisible) {
                         continue;
@@ -109,8 +111,8 @@ class block_section extends block_list {
         $ismoving = ismoving($course->id);
         $sections = get_all_sections($course->id);
 
-        if(!empty($sections) && isset($sections[$this->config->section])) {
-            $section = $sections[$this->config->section];
+        if(!empty($sections) && isset($sections[$this->section])) {
+            $section = $sections[$this->section];
         }
 
         if (!empty($section)) {
@@ -189,7 +191,7 @@ class block_section extends block_list {
         }
 
         if ($modnames) {
-            $this->content->footer = print_section_add_menus($course, $this->config->section, $modnames, true, true);
+            $this->content->footer = print_section_add_menus($course, $this->section, $modnames, true, true);
         } else {
             $this->content->footer = '';
         }

@@ -15,6 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Access rights
+ *
+ * @package    block
+ * @subpackage section
+ * @copyright  2012 onwards Nathan Robbins (https://github.com/nrobbins)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 $capabilities = array(
     // Can edit courses
     'block/section:editcourses' => array(

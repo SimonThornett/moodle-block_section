@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage section
- * @copyright  2012 Nathan Robbins
+ * @copyright  2012 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
