@@ -19,7 +19,7 @@
  * Strings for component 'block_section'
  *
  * @package   block_section
- * @copyright 2012 Nathan Robbins
+ * @copyright  2013 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,5 +32,4 @@ $string['blocksection_help'] = 'The number of the section to display. Section nu
 $string['blocktitle'] = 'Title';
 $string['blocktitle_help'] = 'The title for this instance of the block. Appears in the block header.';
 $string['blockteacheredit'] = 'Teachers Can Edit This Block';
-$string['section:editsections'] = 'Able to set the displayed section';
-$string['section:editcourses'] = 'Able to set the course the section is displayed from';
+$string['section:addinstance'] = 'Add a Section block';

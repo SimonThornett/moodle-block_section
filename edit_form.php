@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage section
- * @copyright  2012 onwards Nathan Robbins (https://github.com/nrobbins)
+ * @copyright  2013 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_section_edit_form extends block_edit_form {
@@ -37,22 +37,19 @@ class block_section_edit_form extends block_edit_form {
 
         $mform->addHelpButton('config_title', 'blocktitle', 'block_section');
 
-        // Select the course if admin.
-        if (has_capability('block/section:editcourses', context_course::instance($this->page->course->id))) {
-        $mform->addElement('text', 'config_course', get_string('blockcourse', 'block_section'));
-        $mform->setDefault('config_course', $this->page->course->id);
-        $mform->setType('config_course', PARAM_INTEGER);
+        if(has_capability('block/section:addinstance', $context)){
+            $mform->addElement('text', 'config_course', get_string('blockcourse', 'block_section'));
+            $mform->setDefault('config_course', $this->page->course->id);
+            $mform->setType('config_course', PARAM_INTEGER);
 
-        $mform->addHelpButton('config_course', 'blockcourse', 'block_section');
+            $mform->addHelpButton('config_course', 'blockcourse', 'block_section');
+
+            // Select the section to display
+            $mform->addElement('text', 'config_section', get_string('blocksection', 'block_section'));
+            $mform->setDefault('config_section', 0);
+            $mform->setType('config_section', PARAM_INTEGER);
+
+            $mform->addHelpButton('config_section', 'blocksection', 'block_section');
         }
-
-        // Select the section to display
-        if (has_capability('block/section:editsections', context_course::instance($this->page->course->id))) {
-        $mform->addElement('text', 'config_section', get_string('blocksection', 'block_section'));
-        $mform->setDefault('config_section', 0);
-        $mform->setType('config_section', PARAM_INTEGER);
-
-        $mform->addHelpButton('config_section', 'blocksection', 'block_section');
-        } 
     }
 }

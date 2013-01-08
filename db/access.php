@@ -25,29 +25,29 @@
  */
 
 $capabilities = array(
-    // Can edit courses
-    'block/section:editcourses' => array(
-         'captype' => 'write',
-         'contextlevel' => CONTEXT_COURSE,
-         'legacy' => array(
-              'editingteacher' => CAP_INHERIT,
-              'coursecreator' => CAP_INHERIT,
-              'manager' => CAP_ALLOW,
-              'admin' => CAP_ALLOW
-         )
+    'block/section:addinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 
-    // Can edit sections
-    'block/section:editsections' => array(
-         'captype' => 'write',
-         'contextlevel' => CONTEXT_COURSE,
-         'legacy' => array(
-              'editingteacher' => CAP_INHERIT,
-              'coursecreator' => CAP_INHERIT,
-              'manager' => CAP_ALLOW,
-              'admin' => CAP_ALLOW
-         )
-    )
+    'block/section:myaddinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
 
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
 
 );

@@ -19,14 +19,14 @@
  *
  * @package    block
  * @subpackage section
- * @copyright  2012 onwards Nathan Robbins (https://github.com/nrobbins)
+ * @copyright  2013 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2012091400;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2013010801;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2011112900;        // Requires this Moodle version
-$plugin->component = 'block_section'; // Full name of the plugin (used for diagnostics)
+$plugin->component = 'block_section';   // Full name of the plugin (used for diagnostics)
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = "2.0.1"; // User-friendly version number
+$plugin->release   = "2.4.1"; // User-friendly version number
