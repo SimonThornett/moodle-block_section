@@ -71,10 +71,10 @@ class block_section extends block_list {
         } else {
             $course = $this->page->course;
         }
-        
+ 
         require_once($CFG->dirroot.'/course/lib.php');
 
-        $context = get_context_instance(CONTEXT_COURSE, $course->id);
+        $context = \context_course::instance($course->id);
         $modinfo = get_fast_modinfo($course);
 
         if (!empty($modinfo->sections[$this->section])) {
@@ -85,18 +85,17 @@ class block_section extends block_list {
                     continue;
                 }
 
-                list($content, $instancename) =
-                        get_print_section_cm_text($cm, $course);
+                $cminfo = \cm_info::create($cm);
 
-                if (!($url = $cm->get_url())) {
-                    $this->content->items[] = $content;
+                if (!($url = $cm->url)) {
+                    $this->content->items[] = $cminfo->get_formatted_content();
                     $this->content->icons[] = '';
                 } else {
                     $linkcss = $cm->visible ? '' : ' class="dimmed" ';
                     //Accessibility: incidental image - should be empty Alt text
                     $icon = '<img src="' . $cm->get_icon_url() . '" class="icon" alt="" />&nbsp;';
                     $this->content->items[] = '<a title="'.$cm->modplural.'" '.$linkcss.' '.$cm->extra.
-                            ' href="' . $url . '">' . $icon . $instancename . '</a>';
+                            ' href="' . $url . '">' . $icon . $cminfo->get_formatted_name() . '</a>';
                 }
             }
         }
