@@ -11,7 +11,3 @@ Suggested Uses:
 - Site-wide feedback activity
 - Display the contents of a meta course on child courses
 - Activities and Resources on My Moodle pages (added by admins/managers only)
-
-==Latest Changes (January 08, 2013)==
-* Removed edit mode - edit the content in the original course.
-* Managers and Admins can add Section blocks to My Moodle
