@@ -33,3 +33,4 @@ $string['blocktitle'] = 'Title';
 $string['blocktitle_help'] = 'The title for this instance of the block. Appears in the block header.';
 $string['blockteacheredit'] = 'Teachers Can Edit This Block';
 $string['section:addinstance'] = 'Add a Section block';
+$string['privacy:metadata'] = 'The Section block plugin does not store any personal data.';
