@@ -22,8 +22,10 @@
  * @copyright  2013 onwards Nathan Robbins (https://github.com/nrobbins)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
+
 class block_section extends block_list {
-    function init(){
+    public function init() {
         $this->title = get_string('pluginname', 'block_section');
     }
     public function specialization() {
@@ -37,71 +39,65 @@ class block_section extends block_list {
         } else {
             $this->section = $this->config->section;
         }
-        
     }
-        
-    function applicable_formats() {
-        return array(
+
+    public function applicable_formats() {
+        return [
                 'course-view' => true,
                 'site-index' => true,
-                'my' => true,
-                );
+                'my' => true
+               ];
     }
     public function instance_allow_multiple() {
         return true;
     }
-    function get_content() {
-        global $USER, $CFG, $DB, $OUTPUT, $COURSE;
 
-        if ($this->content !== NULL) {
+    public function get_content() {
+        global $CFG, $DB;
+
+        if ($this->content !== null) {
             return $this->content;
         }
 
         $this->content = new stdClass();
-        $this->content->items = array();
-        $this->content->icons = array();
+        $this->content->items = [];
+        $this->content->icons = [];
         $this->content->footer = '';
 
         if (empty($this->instance)) {
             return $this->content;
         }
 
-        if(!empty($this->config->course) && ($DB->get_record('course', array('id'=>$this->config->course)) != null)){
-            $course = $DB->get_record('course', array('id'=>$this->config->course));
+        if (!empty($this->config->course) && ($DB->get_record('course', ['id' => $this->config->course]) != null)) {
+            $course = $DB->get_record('course', ['id' => $this->config->course]);
         } else {
             $course = $this->page->course;
         }
-        
+
         require_once($CFG->dirroot.'/course/lib.php');
 
-        $context = get_context_instance(CONTEXT_COURSE, $course->id);
         $modinfo = get_fast_modinfo($course);
-
         if (!empty($modinfo->sections[$this->section])) {
-            $options = array('overflowdiv'=>true);
-            foreach($modinfo->sections[$this->section] as $cmid) {
+            foreach ($modinfo->sections[$this->section] as $cmid) {
                 $cm = $modinfo->cms[$cmid];
                 if (!$cm->uservisible) {
                     continue;
                 }
 
-                list($content, $instancename) =
-                        get_print_section_cm_text($cm, $course);
+                $cminfo = \cm_info::create($cm);
 
-                if (!($url = $cm->get_url())) {
-                    $this->content->items[] = $content;
+                if (!($url = $cm->url)) {
+                    $this->content->items[] = $cminfo->get_formatted_content();
                     $this->content->icons[] = '';
                 } else {
                     $linkcss = $cm->visible ? '' : ' class="dimmed" ';
-                    //Accessibility: incidental image - should be empty Alt text
+                    // Accessibility: incidental image - should be empty Alt text
                     $icon = '<img src="' . $cm->get_icon_url() . '" class="icon" alt="" />&nbsp;';
                     $this->content->items[] = '<a title="'.$cm->modplural.'" '.$linkcss.' '.$cm->extra.
-                            ' href="' . $url . '">' . $icon . $instancename . '</a>';
+                            ' href="' . $url . '">' . $icon . $cminfo->get_formatted_name() . '</a>';
                 }
             }
         }
         return $this->content;
     }
 }
-
-
