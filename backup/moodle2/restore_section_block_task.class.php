@@ -58,9 +58,12 @@ class restore_section_block_task extends restore_block_task {
         // Get the blockid.
         $blockid = $this->get_blockid();
 
+        $originalcourseid = $this->get_old_courseid();
+
         if ($configdata = $DB->get_field('block_instances', 'configdata', ['id' => $blockid])) {
             $config = $this->decode_configdata($configdata);
-            if (!empty($config->course)) {
+            // If the original course contained config pointing to itself then we need to update.
+            if (!empty($config->course) && $originalcourseid == $config->course) {
                 // Update the course id.
                 $config->course = $this->get_courseid();
 
