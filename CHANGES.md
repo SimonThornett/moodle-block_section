@@ -1,3 +1,8 @@
+## 3.1.0
+
+* Implements Backup / Restore. Thanks To Simon Thornett (@SimonThornett)
+* Remove deprecated variable usage
+
 ## 3.0.1
 
 * Make changes for PHP 8.2 compliance
