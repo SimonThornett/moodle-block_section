@@ -95,7 +95,7 @@ class block_section extends block_list {
                     $linkcss = $cm->visible ? '' : ' class="dimmed" ';
                     // Accessibility: incidental image - should be empty Alt text
                     $icon = '<img src="' . $cm->get_icon_url() . '" class="icon" alt="" />&nbsp;';
-                    $this->content->items[] = '<a title="'.$cm->modplural.'" '.$linkcss.' '.$cm->extra.
+                    $this->content->items[] = '<a title="'.$cm->modplural.'" '.$linkcss.' '.
                             ' href="' . $url . '">' . $icon . $cminfo->get_formatted_name() . '</a>';
                 }
             }
